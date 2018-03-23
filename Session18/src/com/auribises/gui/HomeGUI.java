@@ -9,23 +9,19 @@ import java.awt.Panel;
 import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 
-public class RegisterUserGUI implements ActionListener,FocusListener, WindowListener{
+public class HomeGUI implements ActionListener,MouseListener,MouseMotionListener{
 	
 	// Declare Components and Containers
 	JFrame fr;
@@ -34,15 +30,11 @@ public class RegisterUserGUI implements ActionListener,FocusListener, WindowList
 	JButton btnRegister, btnExit;
 	JPanel pnlTitle, pnlName, pnlEmail, pnlPassword, pnlButton, pnlAll;
 	
-	JMenu menuFile,menuHelp;
-	JMenuItem mF1, mF2, mF3, mH1, mH2;
-	JMenuBar menuBar;
-	
 	//JFileChooser fileChooser;
 	
 	// Write a Constructor where you initialize all the Components and Containers
-	public RegisterUserGUI() {
-		fr = new JFrame("Register User");
+	public HomeGUI() {
+		fr = new JFrame("Home");
 		//fr.setTitle("Resgiter User");
 		
 		lblTitle = new JLabel("Please Register Here");
@@ -54,10 +46,7 @@ public class RegisterUserGUI implements ActionListener,FocusListener, WindowList
 		lblPassword = new JLabel("Enter Your Password");
 		
 		txtName = new JTextField(16);
-		
 		txtEmail = new JTextField(16);
-		txtEmail.addFocusListener(this);
-		
 		txtPassword = new JTextField(16);
 		
 		
@@ -76,20 +65,6 @@ public class RegisterUserGUI implements ActionListener,FocusListener, WindowList
 		pnlPassword = new JPanel();
 		pnlButton = new JPanel();
 		pnlAll = new JPanel();
-		
-		menuFile = new JMenu("File");
-		menuHelp = new JMenu("Help");
-		
-		mF1 = new JMenuItem("New");
-		mF2 = new JMenuItem("Save");
-		
-		mF3 = new JMenuItem("Exit");
-		mF3.addActionListener(this);
-		
-		mH1 = new JMenuItem("Welcome");
-		mH2 = new JMenuItem("Search");
-		
-		menuBar = new JMenuBar();
 	}
 	
 	public void showGUI(){
@@ -117,102 +92,73 @@ public class RegisterUserGUI implements ActionListener,FocusListener, WindowList
 		GridLayout layout = new GridLayout(5, 1);
 		pnlAll.setLayout(layout);
 		
-		fr.add(pnlAll);
+		//fr.add(pnlAll);
 		
-		menuFile.add(mF1);
-		menuFile.add(mF2);
-		menuFile.add(mF3);
-		
-		menuHelp.add(mH1);
-		menuHelp.add(mH2);
-		
-		menuBar.add(menuFile);
-		menuBar.add(menuHelp);
-	
-		fr.setJMenuBar(menuBar);
-		
-		fr.setSize(300, 300);
+		fr.setSize(400, 400);
 		fr.setVisible(true);
+		fr.addMouseListener(this);
+		fr.addMouseMotionListener(this);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == btnRegister){
 			
-			/*String name = txtName.getText();
+			String name = txtName.getText();
 			String email = txtEmail.getText();
 			String password = txtPassword.getText();
 			
 			if(!email.contains("@") && !email.contains(".")){
 				lblTitle.setText("Please Enter Correct Email");
 				lblTitle.setBackground(Color.RED);
-			}*/
-
-			//System.out.println("Hello "+name+", Your Email : "+email+" and your password: "+password);
+			}
 			
-			HomeGUI gui = new HomeGUI();
-			gui.showGUI();
-			
-		}else if(e.getSource() == mF3){
-			fr.dispose();
-			System.out.println("Menu Item Clicked");
-		}else {
+			System.out.println("Hello "+name+", Your Email : "+email+" and your password: "+password);
+		}else{
 			fr.dispose();
 		}
 		
 	}
 
 	@Override
-	public void focusGained(FocusEvent e) {
-		System.out.println("Focus Gained");
+	public void mouseClicked(MouseEvent e) {
+		System.out.println("mouseClicked"+e.getX()+" - "+e.getY());
 		
 	}
 
 	@Override
-	public void focusLost(FocusEvent e) {
-		System.out.println("Focus Lost");
+	public void mousePressed(MouseEvent e) {
+		System.out.println("mousePressed"+e.getX()+" - "+e.getY());
 		
 	}
 
 	@Override
-	public void windowOpened(WindowEvent e) {
-		// TODO Auto-generated method stub
+	public void mouseReleased(MouseEvent e) {
+		System.out.println("mouseReleased"+e.getX()+" - "+e.getY());
 		
 	}
 
 	@Override
-	public void windowClosing(WindowEvent e) {
-		// TODO Auto-generated method stub
+	public void mouseEntered(MouseEvent e) {
+		System.out.println("mouseEntered"+e.getX()+" - "+e.getY());
 		
 	}
 
 	@Override
-	public void windowClosed(WindowEvent e) {
-		// TODO Auto-generated method stub
+	public void mouseExited(MouseEvent e) {
+		System.out.println("mouseExited"+e.getX()+" - "+e.getY());
 		
 	}
 
 	@Override
-	public void windowIconified(WindowEvent e) {
-		// TODO Auto-generated method stub
+	public void mouseDragged(MouseEvent e) {
+		System.out.println("mouseDragged "+e.getX()+" - "+e.getY());
 		
 	}
 
 	@Override
-	public void windowDeiconified(WindowEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void windowActivated(WindowEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void windowDeactivated(WindowEvent e) {
-		// TODO Auto-generated method stub
+	public void mouseMoved(MouseEvent e) {
+		System.out.println("mouseMoved "+e.getX()+" - "+e.getY());
 		
 	}
 
